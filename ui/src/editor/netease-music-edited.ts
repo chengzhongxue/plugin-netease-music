@@ -27,11 +27,8 @@ declare module "@halo-dev/richtext-editor" {
 const NeteaseMusic = Node.create({
   name: "neteaseMusic",
 
-  inline() {
-    return true;
-  },
   group() {
-    return "inline";
+     return "block";
   },
 
   addAttributes() {
@@ -79,9 +76,9 @@ const NeteaseMusic = Node.create({
       nodeInputRule({
         find: /^\$netease-music\$$/,
         type: this.type,
-        getAttributes: () => {
-          return { width: "100%" };
-        },
+        getAttributes: (e) => ({
+            src: e[1]
+        }),
       }),
     ];
   },
@@ -162,24 +159,7 @@ const NeteaseMusic = Node.create({
             },
           ],
         };
-      },
-      getDraggable() {
-        return {
-          getRenderContainer({ dom }: { dom: HTMLElement }) {
-            let container = dom;
-            while (
-              container &&
-              !container.hasAttribute("data-node-view-wrapper")
-              ) {
-              container = container.parentElement as HTMLElement;
-            }
-            return {
-              el: container,
-            };
-          },
-          allowPropagationDownward: true,
-        };
-      },
+      }
     }
   }
   

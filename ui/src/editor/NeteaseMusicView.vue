@@ -3,7 +3,7 @@ import type { PMNode } from "@halo-dev/richtext-editor";
 import type { Editor, Node } from "@halo-dev/richtext-editor";
 import { NodeViewWrapper } from "@halo-dev/richtext-editor";
 import { computed, onMounted, ref } from "vue";
-import {axiosInstance} from "@halo-dev/api-client";
+import { axiosInstance } from "@halo-dev/api-client";
 import { VButton,VSpace,VDropdown} from "@halo-dev/components";
 import type {BasicConfig} from "@/types";
 const selecteNeteaseMusic = ref<Object | undefined>();
@@ -150,7 +150,7 @@ const formattedTime = (seconds: number): string => {
 <template>
   <node-view-wrapper as="div" class="inline-block-box inline-block">
     <div
-      class="inline-block overflow-hidden transition-all text-center relative h-full w-full"
+      class="inline-block overflow-hidden transition-all text-center relative h-full w-full rounded-md"
       :class="{
         'rounded ring-2': selected,
       }"
