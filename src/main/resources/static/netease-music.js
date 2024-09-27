@@ -40,6 +40,9 @@
                 case 'song':
                     let songData = await netease_song(id);
                     html += '<div>'
+                    if (nminstance == 0) {
+                        html+='<div id="nm_jplayer" style="display: none;"></div>'
+                    }
                     html += nm_single_playform(songData['id'], nminstance, songData['cover'], songData['title'], songData['artist'], songData['duration']);
                     if (basic.comment) {
                         let commentsData = await comments(id);
@@ -284,21 +287,11 @@
             basic = await basicConfig();
         }
         parents.forEach(parent => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && parent.childElementCount === 0) {
-                        const src = parent.getAttribute("src");
-                        getNeteaseMusic(src, parent, nminstance);
-                        nminstance += 1;
-                        parent.animate([{ opacity: 0 }, { opacity: 1 }], {
-                            duration: 300,
-                            fill: 'forwards',
-                        });
-                        observer.disconnect();
-                    }
-                });
-            });
-            observer.observe(parent);
+            if (parent.childElementCount === 1) {
+                const src = parent.getAttribute("src");
+                getNeteaseMusic(src, parent, nminstance);
+                nminstance += 1;
+            }
         });
     }
 
@@ -321,7 +314,7 @@
         document.body.appendChild(script);
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded",  async () => {
         init();
         loadSingleMinScript();
     }, {
