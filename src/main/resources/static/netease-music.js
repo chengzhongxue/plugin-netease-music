@@ -40,9 +40,6 @@
                 case 'song':
                     let songData = await netease_song(id);
                     html += '<div>'
-                    if (nminstance == 0) {
-                        html+='<div id="nm_jplayer" style="display: none;"></div>'
-                    }
                     html += nm_single_playform(songData['id'], nminstance, songData['cover'], songData['title'], songData['artist'], songData['duration']);
                     if (basic.comment) {
                         let commentsData = await comments(id);

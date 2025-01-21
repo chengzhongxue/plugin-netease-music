@@ -52,10 +52,17 @@ const NeteaseMusic = Node.create({
   },
 
   renderHTML({ HTMLAttributes }) {
-      const divElement = document.createElement('div');
-      divElement.id = "nm_jplayer";
-      divElement.style.display = "none";
-    return ["netease-music", mergeAttributes(HTMLAttributes),divElement];
+    return [
+        "netease-music",
+        mergeAttributes(HTMLAttributes),
+        [
+            "div",
+            {
+                id: "nm_jplayer",
+                style: "display:none;",
+            }
+        ],
+    ];
   },
 
   addCommands() {
